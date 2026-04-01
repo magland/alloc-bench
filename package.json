@@ -1,0 +1,15 @@
+{
+  "name": "alloc-bench",
+  "version": "0.1.0",
+  "description": "Allocation benchmark for Float64Array under different workload patterns",
+  "type": "module",
+  "scripts": {
+    "bench": "tsx bench/run-alloc-bench.ts",
+    "bench:quick": "tsx bench/run-alloc-bench.ts --quick"
+  },
+  "devDependencies": {
+    "tinybench": "^3.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
