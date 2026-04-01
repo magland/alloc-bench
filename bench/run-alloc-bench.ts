@@ -1,7 +1,8 @@
 #!/usr/bin/env tsx
 
 import { existsSync, writeFileSync, mkdirSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { Bench } from "tinybench";
 import {
   buildAllocBenchScenarios,
@@ -105,7 +106,8 @@ async function main() {
   const backends: AllocBenchBackend[] = [createJsAllocBackend()];
   for (const modulePath of opts.backendModules) {
     try {
-      const mod = await import(modulePath);
+      const absPath = resolve(modulePath);
+      const mod = await import(pathToFileURL(absPath).href);
       const backend: AllocBenchBackend | null = await mod.createBackend();
       if (backend) backends.push(backend);
     } catch (e) {
